@@ -1,4 +1,4 @@
 var Twit = require('twit');
-var config = require('./config');
+var config = require('./conf');
 
 var T = new Twit(config);
