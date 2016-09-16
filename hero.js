@@ -22,7 +22,7 @@ stream.on('tweet', function (tweet) {
 
   // Configure the request
   var options = {
-      url: 'http://herohelpline.com',
+      url: 'http://pubhack.agpreynolds.co.uk/',
       method: 'POST',
       headers: headers,
       form: {'text': helpText}
@@ -32,15 +32,13 @@ stream.on('tweet', function (tweet) {
   request(options, function (error, response, body) {
       if (!error && response.statusCode == 200) {
           // Print out the response body
-          console.log(body)
+          console.log(body);
+          var dialogue = body;
       }
   })
-
   //helpline call ends
 
-
-
- T.post('statuses/update', {status: 'Please @'+caller+' '+'come back later', in_reply_to_status_id: tweetId}, function (error, response) {
+ T.post('statuses/update', {status: 'Thanks for calling @'+caller+' '+'heroes have been contacted!', in_reply_to_status_id: tweetId}, function (error, response) {
     if (response) {
       console.log('Success! Hero is on its way.');
 
@@ -49,4 +47,10 @@ stream.on('tweet', function (tweet) {
       console.log('There was an error with Twitter:', error);
     }
   });
+
+  //send dm based on dialogue
+  T.post('direct_messages/new', { screen_name:'batmanpub', text:'hello world!' }, function(err, response) {
+    
+  })
+
 })
